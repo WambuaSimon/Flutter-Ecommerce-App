@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_pro/carousel_pro.dart';
+
+
 
 
 void main() => runApp(MyApp());
@@ -24,11 +26,30 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
-    Widget image_corousel = new Container()
+    Widget image_corousel = new Container(
+      height: 200.0,
+      child: new Carousel(
+        boxFit: BoxFit.cover,
+        images: [
+          AssetImage('images/c1.jpg'),
+          AssetImage('images/m1.jpeg'),
+          AssetImage('images/w3.jpeg'),
+          AssetImage('images/w4.jpeg'),
+          AssetImage('images/m2.jpg'),
+        ],
+        autoplay: true,
+        dotSize: 4.0,
+        dotColor: Colors.red,
+        indicatorBgPadding: 6.0,
+        animationCurve: Curves.fastOutSlowIn,
+        animationDuration: Duration(milliseconds: 1000),
+      ),
+    );
 
 
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.0,
         backgroundColor: Colors.red,
         title: Text("FashApp"),
         actions: <Widget>[
@@ -117,13 +138,14 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             )
 
-
-
-
-
-
           ],
         ),
+      ),
+
+      body: new ListView(
+        children: <Widget>[
+          image_corousel
+        ],
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
