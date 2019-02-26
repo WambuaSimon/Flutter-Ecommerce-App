@@ -3,6 +3,7 @@ import 'package:carousel_pro/carousel_pro.dart';
 
 import './components/horizontal_listview.dart';
 import './components/products.dart';
+import './pages/cart.dart';
 
 void main() => runApp(MyApp());
 
@@ -36,12 +37,11 @@ class _MyHomePageState extends State<MyHomePage> {
           AssetImage('images/w4.jpeg'),
           AssetImage('images/m2.jpg'),
         ],
-        autoplay: true,
+        autoplay: false,
         dotSize: 4.0,
         dotColor: Colors.red,
         indicatorBgPadding: 6.0,
-        animationCurve: Curves.fastOutSlowIn,
-        animationDuration: Duration(milliseconds: 1000),
+        dotBgColor: Colors.transparent,
       ),
     );
 
@@ -53,9 +53,14 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: <Widget>[
           new IconButton(
               icon: Icon(Icons.search, color: Colors.white), onPressed: () {}),
+
           new IconButton(
-              icon: Icon(Icons.shopping_cart, color: Colors.white),
-              onPressed: () {})
+              icon: Icon(Icons.shopping_cart, color: Colors.white), onPressed: () {
+
+                Navigator.push(context, MaterialPageRoute(builder: (context) => new Cart()));
+          }),
+
+
         ],
       ),
       drawer: new Drawer(
@@ -86,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onTap: () {},
               child: ListTile(
                 title: Text('My Account'),
+
                 leading: Icon(Icons.person, color: Colors.red),
               ),
             ),
@@ -97,10 +103,12 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>new Cart() ));
+              },
               child: ListTile(
-                title: Text('Categories'),
-                leading: Icon(Icons.dashboard, color: Colors.red),
+                title: Text('Shopping Cart'),
+                leading: Icon(Icons.shopping_cart, color: Colors.red),
               ),
             ),
             InkWell(
@@ -132,19 +140,23 @@ class _MyHomePageState extends State<MyHomePage> {
       body: new ListView(
         children: <Widget>[
           image_corousel,
-          new Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: new Text("Categories"),
+          Container(
+            alignment: Alignment.centerLeft,
+            child: new Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: new Text("Categories"),
+            ),
           ),
 
           /*create horizontal listview*/
           HorizontalList(),
-
-          new Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: new Text("Recent Products"),
+          Container(
+            alignment: Alignment.centerLeft,
+            child: new Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: new Text("Recent Products"),
+            ),
           ),
-
           Container(
             height: 320.0,
             child: Products(),
